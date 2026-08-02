@@ -146,7 +146,7 @@ const FiatWallets: React.FC = React.memo(() => {
             pl: '30px',
             gap: '8px',
             borderRadius: '4px',
-            border: '1px dashed #FFFFFF4D',
+            border: '1.5px dashed #FFFFFF4D',
             backdropFilter: 'blur(16px)',
             cursor: 'pointer',
             backgroundColor: "#22222399",

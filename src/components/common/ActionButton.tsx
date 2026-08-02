@@ -13,10 +13,10 @@ const variantStyles: Record<CustomButtonVariant, SxProps<Theme>> = {
     width: 142,
     height: 25,
     padding: '4px 16px',
-    border: '1px dashed #FFFFFF4D',
+    border: '1.3px dashed #FFFFFF4D',
     backdropFilter: 'blur(16px)',
-    backgroundColor: 'transparent',
-    color: 'rgba(255, 255, 255, 0.70)',
+    backgroundColor: '#22222399',
+    color: '#D9D9D980',
     fontSize: '12px',
     '&:hover': {
       borderColor: '#FFFFFF99',
