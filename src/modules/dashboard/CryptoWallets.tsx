@@ -115,7 +115,7 @@ const CryptoRow: React.FC<CryptoRowProps> = React.memo(
         </Box>
 
         {/* Actions */}
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 12 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 12, flex: 2 }}>
           <AppTypography
             variant="body1Semibold"
             color="#D9D9D9"
