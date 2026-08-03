@@ -127,7 +127,11 @@ const AppNavbar: React.FC = React.memo(() => {
                     sx={{
                         display: 'flex',
                         alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 89,
                         height: 40,
+                        padding: '10px',
+                        gap: '8px', // the original icon + text used 8px or we can stick to 10px from the box padding
                         borderRadius: '4px',
                         background:
                             'linear-gradient(0deg, rgba(54, 54, 54, 0.4), rgba(54, 54, 54, 0.4)), linear-gradient(79.11deg, rgba(224, 40, 112, 0.406) 57.05%, rgba(249, 104, 62, 0.595) 106.48%)',
@@ -135,15 +139,43 @@ const AppNavbar: React.FC = React.memo(() => {
                         cursor: 'pointer',
                         transition: 'opacity 0.2s ease',
                         '&:hover': { opacity: 0.85 },
+                        position: 'relative',
+                        overflow: 'hidden',
                     }}
                 >
-                    <Image
-                        src="/special/event.png"
-                        alt="Events"
-                        width={89}
-                        height={40}
-                        priority
+                    {/* GIF Layer */}
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            width: 108,
+                            height: 108,
+                            top: '75%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            backgroundImage: 'url(/special/event.gif)',
+                            backgroundSize: '108px 108px',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            mixBlendMode: 'lighten',
+                            opacity: 1,
+                            pointerEvents: 'none',
+                            zIndex: 0,
+                        }}
                     />
+
+                    {/* Content Layer */}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px', zIndex: 1 }}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+                            <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H14" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M16 2V6" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M8 2V6" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M3 10H21" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M17.5 22L16.8 21.363C14.8 19.55 13.5 18.369 13.5 16.921C13.5 15.539 14.58 14.459 15.96 14.459C16.74 14.459 17.49 14.83 17.5 15.4C17.51 14.83 18.26 14.459 19.04 14.459C20.42 14.459 21.5 15.539 21.5 16.921C21.5 18.369 20.2 19.55 18.2 21.363L17.5 22Z" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <AppTypography variant="body1Semibold" color="#D9D9D9">
+                            Events
+                        </AppTypography>
+                    </Box>
                 </Box>
 
                 {/* Action Icons (Frame 4329 + Frame 3589: width 215px, height 40px, gap 8px) */}

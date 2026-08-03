@@ -21,21 +21,32 @@ interface CustomTooltipProps {
   active?: boolean;
   payload?: Array<{ value: number }>;
   label?: string;
+  coordinate?: { x: number; y: number };
+  viewBox?: { x: number; y: number; width: number; height: number };
 }
 
 const DAY_FULL_NAMES: Record<string, string> = {
   M: 'Monday',
-  T: 'Thursday',
+  Tu: 'Tuesday',
   W: 'Wednesday',
+  Th: 'Thursday',
   F: 'Friday',
-  S: 'Saturday',
+  Sa: 'Saturday',
+  Su: 'Sunday',
 };
 
-const CustomChartTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
+const CustomChartTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label, coordinate, viewBox }) => {
   if (active && payload && payload.length) {
+    const baseLabel = (label || '').split('-')[0];
+
+    // If the active dot is on the right half of the chart, Recharts flips the tooltip to the left.
+    // So the pointer should be on the right side of the tooltip.
+    const isPointerOnRight = coordinate && viewBox && coordinate.x > viewBox.width / 2;
+
     return (
       <Box
         sx={{
+          position: 'relative',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -50,15 +61,15 @@ const CustomChartTooltip: React.FC<CustomTooltipProps> = ({ active, payload, lab
           backgroundColor: '#FFFFFFB2',
           backdropFilter: 'blur(16px)',
           boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.4)',
+          overflow: 'visible',
         }}
       >
         <AppTypography variant="smallBold" color="#0C0E12">
-          {DAY_FULL_NAMES[label || ''] || label}
+          {DAY_FULL_NAMES[baseLabel] || baseLabel}
         </AppTypography>
         <AppTypography variant="captionBold" color="#0C0E12">
           {payload[0].value.toFixed(2)}BTC
         </AppTypography>
-
       </Box>
     );
   }
@@ -68,6 +79,7 @@ const CustomChartTooltip: React.FC<CustomTooltipProps> = ({ active, payload, lab
 /* ─── Balance Card Component ─── */
 const BalanceCard: React.FC = React.memo(() => {
   const [activeFilter, setActiveFilter] = React.useState('7D');
+  const [showBalance, setShowBalance] = React.useState(true);
 
   return (
     <AppGlassCard
@@ -79,7 +91,7 @@ const BalanceCard: React.FC = React.memo(() => {
         alignItems: 'stretch',
         justifyContent: 'space-between',
         width: '100%',
-        minHeight: '231.87px',
+        minHeight: '250px',
         p: '20px',
         background: 'linear-gradient(90deg, rgba(34, 34, 35, 0.3) 0%, rgba(34, 34, 35, 0.3) 100%)',
         backdropFilter: 'blur(16px)',
@@ -102,13 +114,20 @@ const BalanceCard: React.FC = React.memo(() => {
             <AppTypography variant="subtitle1" color="#FFFFFF">
               Total Balance
             </AppTypography>
-            <Image src="/modules/dashboard/eye.svg" alt="eye" width={16} height={16} style={{ opacity: 1, cursor: 'pointer' }} />
+            <Image
+              src={showBalance ? "/modules/dashboard/eye.svg" : "/modules/dashboard/eye-off.svg"}
+              alt="eye"
+              width={16}
+              height={16}
+              style={{ opacity: 1, cursor: 'pointer' }}
+              onClick={() => setShowBalance(!showBalance)}
+            />
           </Box>
 
           {/* Balance Amount */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <AppTypography variant="h1Balance" color="#FFFFFF">
-              258346.00 BTC
+              {showBalance ? "258346.00" : "*******"} BTC
             </AppTypography>
             {/* Green Badge */}
             <Box
@@ -131,12 +150,12 @@ const BalanceCard: React.FC = React.memo(() => {
 
           {/* INR Equivalent */}
           <AppTypography variant="body1Bold" color="rgba(217, 217, 217, 0.34)">
-            ≈ 25,000 INR
+            {showBalance ? "≈ 25,000" : "≈ *******"} INR
           </AppTypography>
         </Box>
 
         {/* Action Buttons */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '20px' }}>
           <ActionButton variant="pink">Deposit</ActionButton>
           <ActionButton variant="glassDark">Buy Crypto</ActionButton>
           <ActionButton variant="glassDark">Withdraw</ActionButton>
@@ -179,8 +198,8 @@ const BalanceCard: React.FC = React.memo(() => {
                 px: '10px',
                 py: '6px',
                 fontSize: '12px',
-                fontWeight: activeFilter === filter ? 700 : 400,
-                color: activeFilter === filter ? '#FFFFFF' : 'rgba(217, 217, 217, 0.70)',
+                fontWeight: 700,
+                color: "#FFFFFF"
               }}
             >
               {filter}
@@ -197,8 +216,14 @@ const BalanceCard: React.FC = React.memo(() => {
             >
               <defs>
                 <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#D61D64" stopOpacity={0.4} />
+                  <stop offset="-5.15%" stopColor="#D61D64" stopOpacity={1} />
                   <stop offset="82.4%" stopColor="rgba(214, 29, 100, 0)" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="rgba(214, 29, 100, 0)" stopOpacity={0} />
+                  <stop offset="7.91%" stopColor="#D61D64" stopOpacity={1} />
+                  <stop offset="91.39%" stopColor="#D61D64" stopOpacity={1} />
+                  <stop offset="99.34%" stopColor="rgba(214, 29, 100, 0)" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <XAxis
@@ -210,6 +235,13 @@ const BalanceCard: React.FC = React.memo(() => {
                   fontSize: 11,
                   fontFamily: '"Barlow Condensed", sans-serif',
                   letterSpacing: '0.88px',
+                }}
+                tickFormatter={(value) => {
+                  if (typeof value !== 'string' || value.includes('-')) return '';
+                  if (value === 'Tu') return 'T';
+                  if (value === 'Th') return 'T';
+                  if (value === 'Sa' || value === 'Su') return 'S';
+                  return value;
                 }}
                 dy={8}
               />
@@ -224,15 +256,15 @@ const BalanceCard: React.FC = React.memo(() => {
               <Area
                 type="natural"
                 dataKey="value"
-                stroke="#D61D64"
-                strokeWidth={2}
+                stroke="url(#lineGradient)"
+                strokeWidth={1.15}
                 fill="url(#chartGradient)"
                 dot={false}
                 activeDot={{
-                  r: 6,
-                  fill: '#FFFFFF',
-                  stroke: '#D61D64',
-                  strokeWidth: 2,
+                  r: 7.83,
+                  fill: '#D61D64',
+                  stroke: '#FFFFFF',
+                  strokeWidth: 3.03,
                 }}
               />
               <ReferenceDot

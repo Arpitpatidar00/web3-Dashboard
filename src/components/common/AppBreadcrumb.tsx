@@ -53,7 +53,7 @@ const AppBreadcrumb: React.FC<BreadcrumbProps> = React.memo(
               <React.Fragment key={index}>
                 <AppTypography
                   variant="body1Bold"
-                  color={isLast ? '#D9D9D9' : '#D9D9D980'}
+                  color={isLast ? '#D9D9D980' : '#D9D9D9'}
                   sx={{
                     cursor: isLast ? 'default' : 'pointer',
                     '&:hover': { color: isLast ? '#D9D9D9' : '#D9D9D9' },
@@ -79,7 +79,17 @@ const AppBreadcrumb: React.FC<BreadcrumbProps> = React.memo(
         {actionButton ? (
           actionButton
         ) : showActionButton ? (
-          <ActionButton variant={actionButtonVariant} onClick={onActionButtonClick}>
+          <ActionButton
+            variant={actionButtonVariant}
+            onClick={onActionButtonClick}
+            sx={{
+              fontFamily: '"Barlow Condensed", sans-serif',
+              fontWeight: 700,
+              fontSize: '12px',
+              lineHeight: '100%',
+              letterSpacing: '0.08em',
+            }}
+          >
             {actionButtonLabel}
           </ActionButton>
         ) : null}

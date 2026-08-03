@@ -25,9 +25,9 @@ const AppFooter: React.FC = React.memo(() => {
         >
             {/* ─── Left: Status Items ─── */}
             <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, gap: 20 }}>
-                {/* Signal */}
+                {/* Chevrons / Badge */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <Image src="/icons/footer/droplets-01.svg" alt="signal" width={20} height={20} />
+                    <Image src="/icons/footer/chevrons-up-badge.svg" alt="badge" width={20} height={20} />
                     <AppTypography variant="captionRegular" color="rgba(217, 217, 217, 0.70)">
                         1.7%
                     </AppTypography>
@@ -43,9 +43,9 @@ const AppFooter: React.FC = React.memo(() => {
                     }}
                 />
 
-                {/* Calendar / CPU */}
+                {/* Shopping bag */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <Image src="/icons/footer/cpu-chip-01.svg" alt="cpu" width={20} height={20} style={{ opacity: 0.70 }} />
+                    <Image src="/icons/footer/shopping-bag-01.svg" alt="shopping bag" width={20} height={20} style={{ opacity: 0.70 }} />
                     <AppTypography variant="captionRegular" color="rgba(217, 217, 217, 0.70)">
                         156
                     </AppTypography>
@@ -61,9 +61,9 @@ const AppFooter: React.FC = React.memo(() => {
                     }}
                 />
 
-                {/* Badge / Chevrons */}
+                {/* Droplets */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <Image src="/icons/footer/chevrons-up-badge.svg" alt="timer" width={20} height={20} style={{ opacity: 0.70 }} />
+                    <Image src="/icons/footer/droplets-01.svg" alt="droplets" width={20} height={20} style={{ opacity: 0.70 }} />
                     <AppTypography variant="captionRegular" color="rgba(217, 217, 217, 0.70)">
                         6:17
                     </AppTypography>
@@ -79,9 +79,9 @@ const AppFooter: React.FC = React.memo(() => {
                     }}
                 />
 
-                {/* Shopping bag / Favorite */}
+                {/* Shield */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <Image src="/icons/footer/shopping-bag-01.svg" alt="shopping bag" width={20} height={20} style={{ opacity: 0.70 }} />
+                    <Image src="/icons/footer/shield-02.svg" alt="shield" width={20} height={20} style={{ opacity: 0.70 }} />
                     <AppTypography variant="captionRegular" color="rgba(217, 217, 217, 0.70)">
                         98
                     </AppTypography>
@@ -102,13 +102,30 @@ const AppFooter: React.FC = React.memo(() => {
                     <AppTypography component="span" variant="captionRegular" sx={{ fontSize: '15px', lineHeight: 1 }}>
                         🎉
                     </AppTypography>
-                    <AppTypography variant="captionBold" color="#4ADE80">
-                        You Won!
+                    <AppTypography
+                        sx={{
+                            fontFamily: '"Barlow Condensed", sans-serif',
+                            fontWeight: 600,
+                            fontSize: '14px',
+                            lineHeight: '100%',
+                            letterSpacing: '0.08em',
+                            color: '#D61D64',
+                        }}
+                    >
+                        You Won! -
                     </AppTypography>
-                    <AppTypography variant="captionRegular" color="rgba(217, 217, 217, 0.70)">
-                        - 1200 DOGE
+                    <AppTypography
+                        sx={{
+                            fontFamily: '"Barlow Condensed", sans-serif',
+                            fontWeight: 600,
+                            fontSize: '14px',
+                            lineHeight: '100%',
+                            letterSpacing: '0.08em',
+                            color: '#D9D9D9',
+                        }}
+                    >
+                        1200 DOGE
                     </AppTypography>
-
                 </Box>
 
                 {/* Divider */}
@@ -121,18 +138,9 @@ const AppFooter: React.FC = React.memo(() => {
                     }}
                 />
 
-                {/* Shield icon */}
-                <Box
-                    sx={{
-                        width: 28,
-                        height: 28,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        p: 4,
-                    }}
-                >
-                    <Image src="/icons/footer/shield-02.svg" alt="shield" width={20} height={20} style={{ opacity: 0.70 }} />
+                {/* CPU */}
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <Image src="/icons/footer/cpu-chip-01.svg" alt="cpu" width={20} height={20} />
                 </Box>
             </Box>
 

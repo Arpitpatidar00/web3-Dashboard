@@ -101,7 +101,18 @@ const AppSidebar: React.FC = React.memo(() => {
                         <Image src="/icons/sidebar/magic-wand-01.svg" alt="edit" width={20} height={20} style={{ opacity: 1 }} />
                     </Box>
                 </Box>
-                <AppTypography variant="smallRegular" color="rgba(217, 217, 217, 0.34)">
+                <AppTypography
+                    variant="smallRegular"
+                    color="#737373"
+                    sx={{
+                        fontFamily: '"Barlow Condensed", sans-serif',
+                        fontWeight: 700,
+                        fontSize: '12px',
+                        lineHeight: '100%',
+                        letterSpacing: '0.08em',
+                        textAlign: 'right',
+                    }}
+                >
                     v0.1.23
                 </AppTypography>
             </Box>

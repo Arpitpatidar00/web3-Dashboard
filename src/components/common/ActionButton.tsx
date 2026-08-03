@@ -11,7 +11,7 @@ export interface ActionButtonProps extends Omit<ButtonProps, 'variant'> {
 const variantStyles: Record<CustomButtonVariant, SxProps<Theme>> = {
   dashed: {
     width: 142,
-    height: 25,
+    height: 28,
     padding: '4px 16px',
     border: '1.3px dashed #FFFFFF4D',
     backdropFilter: 'blur(16px)',

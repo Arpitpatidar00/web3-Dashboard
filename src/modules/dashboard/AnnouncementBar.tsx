@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import AppTypography from '@/components/common/AppTypography';
+import Image from 'next/image';
 
 const AnnouncementBar: React.FC = React.memo(() => {
   return (
@@ -10,7 +11,6 @@ const AnnouncementBar: React.FC = React.memo(() => {
         alignItems: 'center',
         width: 'auto',
         mx: '20px',
-        mt: '10px', // slight top margin so the shadow/top isn't clipped
         mb: '12px', // reserve space for the stacked pseudo-elements underneath
         height: 29,
         gap: '10px',
@@ -66,8 +66,8 @@ const AnnouncementBar: React.FC = React.memo(() => {
         <Box
           sx={{
             width: 3,
-            height: 28,
-            backgroundColor: '#4ADE80',
+            height: 18,
+            backgroundColor: '#69E511',
             borderRadius: '2px',
             flexShrink: 0,
           }}
@@ -94,35 +94,16 @@ const AnnouncementBar: React.FC = React.memo(() => {
           </AppTypography>
         </AppTypography>
 
-        {/* Close button */}
         <Box
           sx={{
-            width: 20,
-            height: 20,
+            cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            color: '#D9D9D9',
-            opacity: 0.8,
             '&:hover': { opacity: 1 },
+
           }}
         >
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M11 1L1 11M1 1L11 11"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Image src="/modules/dashboard/x-close.svg" alt="close" width={16} height={16} />
         </Box>
       </Box>
     </Box>

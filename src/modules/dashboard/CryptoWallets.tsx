@@ -19,11 +19,14 @@ interface CryptoRowProps {
 
 const CryptoRow: React.FC<CryptoRowProps> = React.memo(
   ({ symbol, name, balance, balanceINR, holdAmount, stakedAmount }) => {
+    const [showHold, setShowHold] = React.useState(false);
+    const [showStaked, setShowStaked] = React.useState(false);
+
     return (
       <Box
         sx={{
-          display: 'grid',
-          gridTemplateColumns: '2fr 3fr 1.2fr 1.2fr 2fr',
+          display: 'flex',
+          justifyContent: 'space-between',
           alignItems: 'center',
           width: '100%',
           height: 72,
@@ -32,10 +35,11 @@ const CryptoRow: React.FC<CryptoRowProps> = React.memo(
           backgroundColor: '#22222366',
           border: '1px solid #FFFFFF14',
           backdropFilter: 'blur(16px)',
+          gap: '16px'
         }}
       >
         {/* Left: Reorder + Logo + Name */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 12, flex: 2 }}>
           <Image src="/modules/dashboard/Reorder dots.svg" alt="reorder" width={16} height={16} style={{ opacity: 1, cursor: 'grab' }} />
           <Box
             sx={{
@@ -57,44 +61,56 @@ const CryptoRow: React.FC<CryptoRowProps> = React.memo(
             <AppTypography variant="smallBold" color="#D9D9D980">
               {name}
             </AppTypography>
-
           </Box>
         </Box>
 
         {/* Balance */}
-        <Box sx={{ textAlign: 'right' }}>
+        <Box sx={{ textAlign: 'right', flex: 3 }}>
           <AppTypography variant="subtitle1" color="#D9D9D9" sx={{ textAlign: 'right' }}>
             {balance}
           </AppTypography>
           <AppTypography variant="body1Bold" color="#D9D9D980" sx={{ textAlign: 'right' }}>
             {balanceINR}
           </AppTypography>
-
         </Box>
 
         {/* Hold */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', flex: 1.2 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <AppTypography variant="subtitle1" color="#D9D9D9" sx={{ textAlign: 'right' }}>
               Hold
             </AppTypography>
-            <Image src="/modules/dashboard/eye-off.svg" alt="eye off" width={14} height={14} style={{ opacity: 0.5 }} />
+            <Image 
+              src={showHold ? "/modules/dashboard/eye.svg" : "/modules/dashboard/eye-off.svg"} 
+              alt="eye" 
+              width={14} 
+              height={14} 
+              style={{ opacity: 0.5, cursor: 'pointer' }} 
+              onClick={() => setShowHold(!showHold)}
+            />
           </Box>
           <AppTypography variant="body1Bold" color="#D9D9D980" sx={{ textAlign: 'right' }}>
-            {holdAmount}
+            {showHold ? holdAmount : "*******"}
           </AppTypography>
         </Box>
 
         {/* Staked */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', flex: 1.2 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <AppTypography variant="subtitle1" color="#D9D9D9" sx={{ textAlign: 'right' }}>
               Staked
             </AppTypography>
-            <Image src="/modules/dashboard/eye-off.svg" alt="eye off" width={14} height={14} style={{ opacity: 0.5 }} />
+            <Image 
+              src={showStaked ? "/modules/dashboard/eye.svg" : "/modules/dashboard/eye-off.svg"} 
+              alt="eye" 
+              width={14} 
+              height={14} 
+              style={{ opacity: 0.5, cursor: 'pointer' }} 
+              onClick={() => setShowStaked(!showStaked)}
+            />
           </Box>
           <AppTypography variant="body1Bold" color="#D9D9D980" sx={{ textAlign: 'right' }}>
-            {stakedAmount}
+            {showStaked ? stakedAmount : "*******"}
           </AppTypography>
         </Box>
 

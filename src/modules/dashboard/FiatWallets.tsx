@@ -158,7 +158,7 @@ const FiatWallets: React.FC = React.memo(() => {
             },
           }}
         >
-          <Image src="/modules/dashboard/plus.svg" alt="plus" width={16} height={16} style={{ opacity: 0.54 }} />
+          <Image src="/modules/dashboard/plus.svg" alt="plus" width={16} height={16} style={{ opacity: 1 }} />
           <AppTypography variant="body1Bold" color="#FFFFFF" sx={{ whiteSpace: 'nowrap' }}>
             Add More Fiats
           </AppTypography>

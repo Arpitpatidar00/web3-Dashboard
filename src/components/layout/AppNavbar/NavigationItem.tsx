@@ -18,9 +18,9 @@ const iconMap: Record<string, string> = {
   link: '/icons/sidebar/link-01.svg',
   faucet: '/icons/sidebar/coins-hand.svg',
   monitor: '/icons/sidebar/tv-01.svg',
-  compass: '/icons/sidebar/magic-wand-01.svg',
+  compass: '/icons/sidebar/globe-04.svg',
   grid4: '/icons/sidebar/grid-2x2.svg',
-  shoppingBag: '/icons/navbar/shopping-bag-02.svg',
+  shoppingBag: '/icons/sidebar/tv-01.svg',
 };
 
 const NavigationItem: React.FC<NavigationItemProps> = React.memo(
@@ -76,7 +76,7 @@ const NavigationItem: React.FC<NavigationItemProps> = React.memo(
             width={20}
             height={20}
             style={{
-              opacity: active ? 1 : 0.54,
+              opacity: 1,
               flexShrink: 0,
               position: 'relative',
               zIndex: 1,
@@ -98,8 +98,8 @@ const NavigationItem: React.FC<NavigationItemProps> = React.memo(
 
         {badge !== undefined && (
           <AppTypography
-            variant="h3NavLight"
-            color="rgba(217, 217, 217, 0.54)"
+            variant="h3Nav"
+            color={active ? '#FFFFFF' : '#D9D9D9'}
             sx={{
               position: 'relative',
               zIndex: 1,
